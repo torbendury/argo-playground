@@ -1,0 +1,3 @@
+server:
+  extraArgs: #? Let argo generate TLS certs instead of relying on external LB
+    - --insecure
