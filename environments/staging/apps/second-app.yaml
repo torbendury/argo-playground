@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-app
+  name: second-app-bar
   namespace: argocd
   finalizers: #? Delete k8s resources when Application is deleted
     - resources-finalizer.argocd.argoproj.io
@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/torbendury/argo-playground.git
     targetRevision: HEAD
-    path: my-app
+    path: environments/staging/second-app
   destination:
     server: https://kubernetes.default.svc #? change when running argo on different cluster
   syncPolicy:
