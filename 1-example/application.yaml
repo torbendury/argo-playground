@@ -5,6 +5,8 @@ kind: Application
 metadata:
   name: my-app
   namespace: argocd
+  finalizers: #? Delete k8s resources when Application is deleted
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
