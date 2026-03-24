@@ -1,0 +1,27 @@
+# this file is applied manually and from then on points to the app directory
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app
+  namespace: argocd
+  finalizers: #? Delete k8s resources when Application is deleted
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/torbendury/argo-playground.git
+    targetRevision: HEAD
+    path: my-app
+  destination:
+    server: https://kubernetes.default.svc #? change when running argo on different cluster
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+      - Validate=true
+      - CreateNamespace=false
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
