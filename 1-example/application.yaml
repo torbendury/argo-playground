@@ -1,0 +1,15 @@
+# this file is applied manually and from then on points to the app directory
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/torbendury/argo-playground.git
+    targetRevision: HEAD
+    path: my-app
+  destination:
+    server: https://kubernetes.default.svc #? change when running argo on different cluster
